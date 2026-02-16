@@ -1,20 +1,64 @@
-* Propuesta de proyecto.
+* Propuesta de proyecto
 ** Introducción
-Con el paso del tiempo y tras varias actualizaciones, algunas de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, incluida la beta de GNOME 50, cuyo lanzamiento está previsto para el 18 de marzo de 2026.
-Dado que se trata de múltiples extensiones, la intención es unificarlas en una sola, creando una solución similar a Just Perfection o a la ya abandonada Aylur's Widgets (principal inspiración de este proyecto), que integran en una única extensión múltiples funcionalidades, ajustes y widgets.
-Una vez que las extensiones estén adaptadas a las versiones actuales del escritorio y se haya adquirido experiencia tras analizar y modificar su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades y opciones de configuración más avanzadas.
+Con el paso del tiempo y de las actualizaciones, varias de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, incluida GNOME 50 (actualmente disponible en fase beta), cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026.
 
-Como autocrítica, considero que el punto más débil del proyecto es su dispersión y amplitud de alcance. Las extensiones que lo conformarán son muy diferentes entre sí, lo que puede generar cierta confusión, siendo el objetivo final poco claro.
+Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), ambas concentran en una única extensión múltiples funcionalidades, ajustes y widgets. 
+
+Una vez que las extensiones estén adaptadas a las versiones más recientes del escritorio y tras haber adquirido experiencia mediante el análisis y la modificación de su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades y opciones de configuración.
+
+Como autocrítica, considero que el punto más débil del proyecto es su dispersión y amplitud de alcance. Las extensiones que lo conformarán son muy diferentes entre sí, lo que puede generar cierta confusión, siendo el objetivo final poco claro y ambicioso.
 ** Propuesta
-La extension estaría conformada por:
+La extensión estaría conformada por: 
 *** Aylur's widgets 
 #+CAPTION: Screenshot que muestra el mensaje "DISCONTINUED" por parte del desarrollador.
 [[file:./img/aylurs.png]]
-Es la principal inspiración de este proyecto, esta extensión es compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más porte. 
-    La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de extensiones: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
-[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente de la extensión]].
-Primero haré un revisado de la extensión, mencionado que partes considero que sería bueno descartar, cuáles mantener y por qué, además de extensiones podríamos estudiar para ayudarnos al desarrollo.
-*** ----
+Es la principal inspiración de este proyecto, compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más soporte. 
+La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de widgets: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
+
+[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente.]].
+
+Haré una revisión de la extensión, mencionando que partes considero conveniente actualizar, cuáles no y por qué, además de qué otras extensiones podríamos estudiar para ayudarnos al desarrollo.
+#+CAPTION: Vista general de la configuración de la extensión
+[[file:./img/aylurs2.png]]
+**** Background Clock
+[[file:./img/aylurs-clock.svg]]
+Añade un widget de reloj al escritorio, al estilo de conky. Permite personalizar:
+- Lugar, mediante "layouts" o colocando las coordenadas (x,y).
+- Mostrar u ocultar hora y fecha.
+- Estilo del widget
+	- Color de background
+	- Padding
+	- Tamaño del borde
+	- Redondeado del borde
+	- Sombreado
+
+Considero fundamental mejorar el rendimiento de este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al ingresar al "overview".
+**** Battery Bar 
+**** Dash Board
+**** DateMenu Mod
+**** Media Player
+**** Power Menu
+**** Workspace Indicator
+**** Notification Indicator
+**** Quick Settings
 *** Quick Settings Tweaks
+
 *** Quick Text (y la integración de un portapapeles al estilo unclutter)
+
+
+
+Aquí dejamos de lado las Configuraciones visuales y pasamos a algo centrado en la productividad.
+Quick Text es compatible hasta GNOME 47
+
+Capture rápidamente fragmentos de texto e ideas, luego conviértalos en tareas o eventos
+
+Extensión Gnome-shell para insertar rápidamente notas en un archivo
+
+Diseñada para trabajar con casi cualquier aplicación de toma de notas basada en texto, esta extensión simplemente inserta fragmentos (con un prefijo opcional y sufijo) en un archivo de texto determinado.
+
+La combinación de teclas calientes (<ctrl> + <super> + i de forma predeterminada) se puede configurar así como el archivo de destino.
+
+El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
+
+Consulte el wiki para ver las capturas de pantalla y las instrucciones.
 ** Cómo implementar
