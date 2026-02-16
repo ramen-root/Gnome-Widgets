@@ -39,9 +39,10 @@ Añade un widget de reloj al escritorio, al estilo de [[https://github.com/brndn
 	- Redondeado del borde
 	- Sombreado
 
-Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al integrar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
+Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al intesar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
 **** Battery Bar
 [[file:./img/aylurs-battery.png]]
+
 Muestra una barra que indica el porcentaje de batería restante. Puede ser un reemplazo al ícono de batería. Tiene las siguientes opciones de configuración:
 - Posición en el Top Bar: izquierda, derecha o centrado.
 - Mostrar u ocultar el ícono de batería.
@@ -57,8 +58,8 @@ Muestra una barra que indica el porcentaje de batería restante. Puede ser un re
 	- Color con batería baja.
 	- Color de fondo.
 **** Dash Board
-
-**** DateMenu Mod
+[[file:./img/aylurs-dashboard.png]]
+Agrupa todos los widgets en un "cuadro de diálogo". Podemos acceder a esta vista mediante un botón en el Top Bar o mediante un atajo de teclado. Aunque es bonito, considero que es redundante, así que no me parece interesante. Además, más adelante se mostrará otro cuadro de diálogo que puede ser un reemplazo a este DashBoard.
 
 **** Media Player
 [[file:./img/aylurs-player.png]]
@@ -86,20 +87,38 @@ Hay varias extensiones parecidas a este widget, compatibles con versiones actual
 - [[https://extensions.gnome.org/extension/9184/advanced-media-controller][Advanced Media Controller]]
 Y esta curiosidad:
 - [[https://extensions.gnome.org/extension/9153/dock-media-player/][Dock Media Player]]
-
 **** Notification Indicator
+[[file:./img/aylurs-notify.svg]]
 
+Añade un indicador de notificaciones con contador. Puede parecer innecesario en las últimas versiones de GNOME, pues ahora hay un círculo blanco aún lado del reloj que nos indica si hay notificaciones recientes, pero no hay un contador.
+Podemos configurar:
+- Posición en el Top Bar, izquierda, derecha, centrado.
+- Offset.
+- Estilo (íconos de apps o contador).
+- Máxima cantidad de íconos.
+- Ocultar/mostrar el contador.
 **** Power Menu
 [[file:./img/aylurs-power.png]]
 Añade un botón al top bar, al dar clic en él, se muestra un cuadro de diálogo, un "power menu".
+Podemos configurar:
+- Posición en la Top Bar: centrado, izquierda o derecha.
+- Layout, 2x2 o 1x4 (grid de los botones de power).
+- Redondez de los botones.
+- Tamaño de los botones. 
+- Padding de los íconos. 
+- Espaciado.
+- Dialog Background
 **** Workspace Indicator
 [[file:./img/aylurs-workspace.svg]]
 Añade un indicador de workspace, al estilo de waybar. Este widget tenía más sentido en versiones anteriores a GNOME 45, que no tenían la actual píldora indicadora de workspace y solo tenían el botón de actividades. Aun así, sería interesante adaptarlo a las versiones actuales de GNOME, pero, usando como base [[https://extensions.gnome.org/extension/5090/space-bar/][Space Bar]].
 Esta última es una muy buena extensión y está disponible para GNOME 49. Solo me gustaría añadirle una animación similar a la que tiene la pildora stock.
 [[file:./img/spacebar.png]]
-**** Quick Settings
+**** Quick Settings y DateMenu Mod
+[[file:./img/aylurs-quick-notify.svg]]
+Estos dos añaden más opciones de configuración a los Quick Settings y al calendario/notificaciones. Es muy interesante; sin embargo, considero mejor no adaptar estos widgets, principalmente porque a continuación se mostrará una extensión, que en mi opinión lo hace mejor y que está adaptada hasta GNOME 48, por lo que sería más fácil de actualizar.
+Lo que valdría la pena recuperar es la opción de modificar el formato del reloj (también podemos apoyarnos de [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]]) y, tal vez, el monitor de recursos en los quick settings.
 
-*** Quick Settings Tweaks
+*** Quick Settings Tweak
 
 *** Quick Text (y la integración de un portapapeles al estilo unclutter)
 
