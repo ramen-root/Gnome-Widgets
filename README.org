@@ -1,2 +1,20 @@
-# Gnome-Widgets
-Gnome extension
+* Propuesta de proyecto.
+** Introducción
+Con el paso del tiempo y tras varias actualizaciones, algunas de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, incluida la beta de GNOME 50, cuyo lanzamiento está previsto para el 18 de marzo de 2026.
+Dado que se trata de múltiples extensiones, la intención es unificarlas en una sola, creando una solución similar a Just Perfection o a la ya abandonada Aylur's Widgets (principal inspiración de este proyecto), que integran en una única extensión múltiples funcionalidades, ajustes y widgets.
+Una vez que las extensiones estén adaptadas a las versiones actuales del escritorio y se haya adquirido experiencia tras analizar y modificar su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades y opciones de configuración más avanzadas.
+
+Como autocrítica, considero que el punto más débil del proyecto es su dispersión y amplitud de alcance. Las extensiones que lo conformarán son muy diferentes entre sí, lo que puede generar cierta confusión, siendo el objetivo final poco claro.
+** Propuesta
+La extension estaría conformada por:
+*** Aylur's widgets 
+#+CAPTION: Screenshot que muestra el mensaje "DISCONTINUED" por parte del desarrollador.
+[[file:./img/aylurs.png]]
+Es la principal inspiración de este proyecto, esta extensión es compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más porte. 
+    La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de extensiones: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
+[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente de la extensión]].
+Primero haré un revisado de la extensión, mencionado que partes considero que sería bueno descartar, cuáles mantener y por qué, además de extensiones podríamos estudiar para ayudarnos al desarrollo.
+*** ----
+*** Quick Settings Tweaks
+*** Quick Text (y la integración de un portapapeles al estilo unclutter)
+** Cómo implementar
