@@ -4,7 +4,7 @@ Con el paso del tiempo y de las actualizaciones, varias de mis extensiones favor
 
 Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), ambas concentran en una única extensión múltiples funcionalidades, ajustes y widgets. 
 
-Una vez que las extensiones estén adaptadas a las versiones más recientes del escritorio y tras haber adquirido experiencia mediante el análisis y la modificación de su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades y opciones de configuración.
+Una vez que las extensiones estén adaptadas a las versiones más recientes del escritorio y tras haber adquirido experiencia mediante el análisis y la modificación de su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades, opciones de configuración y optimización.
 
 Como autocrítica, considero que el punto más débil del proyecto es su dispersión y amplitud de alcance. Las extensiones que lo conformarán son muy diferentes entre sí, lo que puede generar cierta confusión, siendo el objetivo final poco claro y ambicioso.
 ** Propuesta
@@ -15,32 +15,90 @@ La extensión estaría conformada por:
 Es la principal inspiración de este proyecto, compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más soporte. 
 La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de widgets: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
 
-[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente.]].
+[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente]].
 
-Haré una revisión de la extensión, mencionando que partes considero conveniente actualizar, cuáles no y por qué, además de qué otras extensiones podríamos estudiar para ayudarnos al desarrollo.
+Haré una revisión de la extensión, mencionando que partes considero no convenientes actualizar y por qué, además de qué otras extensiones podríamos estudiar para ayudarnos al desarrollo.
 #+CAPTION: Vista general de la configuración de la extensión
 [[file:./img/aylurs2.png]]
 **** Background Clock
 [[file:./img/aylurs-clock.svg]]
-Añade un widget de reloj al escritorio, al estilo de conky. Permite personalizar:
-- Lugar, mediante "layouts" o colocando las coordenadas (x,y).
-- Mostrar u ocultar hora y fecha.
-- Estilo del widget
+Añade un widget de reloj al escritorio, al estilo de [[https://github.com/brndnmtthws/conky][conky]]. Permite personalizar:
+- Posición, mediante layouts (Middle Center, Bottom Left, etc), o mediante coordenadas (x,y).
+- Mostrar u ocultar la fecha y hora.
+- Reloj:
+	- Formato de hora
+	- Tamaño del reloj
+	- Fuente
+	- Color
+	- Sombras
+- Fecha con las mismas configuraciones que el reloj.
+- Estilo del widget:
 	- Color de background
 	- Padding
 	- Tamaño del borde
 	- Redondeado del borde
 	- Sombreado
 
-Considero fundamental mejorar el rendimiento de este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al ingresar al "overview".
-**** Battery Bar 
+Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al integrar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
+**** Battery Bar
+[[file:./img/aylurs-battery.png]]
+Muestra una barra que indica el porcentaje de batería restante. Puede ser un reemplazo al ícono de batería. Tiene las siguientes opciones de configuración:
+- Posición en el Top Bar: izquierda, derecha o centrado.
+- Mostrar u ocultar el ícono de batería.
+- Mostrar porcentaje.
+- Configuraciones visuales:
+	- Altura de la barra.
+	- Ancho de la barra.
+	- Redondez de las esquinas de la barra.
+	- Padding izquierdo y derecho.
+- Colores de la barra:
+	- Color.
+	- Color cuando se está cargando la batería.
+	- Color con batería baja.
+	- Color de fondo.
 **** Dash Board
+
 **** DateMenu Mod
+
 **** Media Player
-**** Power Menu
-**** Workspace Indicator
+[[file:./img/aylurs-player.png]]
+Añade un reproductor multimedia (controles multimedia en el Top Bar). Permite modificar:
+- Track Button (información del contenido multimedia): 
+	- Activarlos o desactivarlos.
+	- Posición en el Top Bar (centrado, izquierda o derecha).
+	- Longitud máxima del texto.
+	- Mostrar u ocultar ícono del reproductor.
+	- Ícono simbólico o coloreado.
+	- Posición del ícono.
+- Controles
+	- Activarlos o desactivarlos.
+	- Posición en el Top Bar (centrado, izquierda o derecha)
+- Player (el widget mostrado al dar clic en el Track Button).
+	- Limpiar caché
+	- Reproductor preferido
+	- Estilo: Normal, horizontal, compacto, label in cover, label in cover + vertical control, full.
+	- Altura, ancho y redondez de la carátula del álbum
+	- Mostrar u ocultar título y modificar su alineación. 
+	- Mostrar u ocultar un slider de volumen y un botón de shuffle y loop.
+
+Hay varias extensiones parecidas a este widget, compatibles con versiones actuales de GNOME, que podríamos usar como referencia:
+- [[https://extensions.gnome.org/extension/4470/media-controls][Media Controls]]
+- [[https://extensions.gnome.org/extension/9184/advanced-media-controller][Advanced Media Controller]]
+Y esta curiosidad:
+- [[https://extensions.gnome.org/extension/9153/dock-media-player/][Dock Media Player]]
+
 **** Notification Indicator
+
+**** Power Menu
+[[file:./img/aylurs-power.png]]
+Añade un botón al top bar, al dar clic en él, se muestra un cuadro de diálogo, un "power menu".
+**** Workspace Indicator
+[[file:./img/aylurs-workspace.svg]]
+Añade un indicador de workspace, al estilo de waybar. Este widget tenía más sentido en versiones anteriores a GNOME 45, que no tenían la actual píldora indicadora de workspace y solo tenían el botón de actividades. Aun así, sería interesante adaptarlo a las versiones actuales de GNOME, pero, usando como base [[https://extensions.gnome.org/extension/5090/space-bar/][Space Bar]].
+Esta última es una muy buena extensión y está disponible para GNOME 49. Solo me gustaría añadirle una animación similar a la que tiene la pildora stock.
+[[file:./img/spacebar.png]]
 **** Quick Settings
+
 *** Quick Settings Tweaks
 
 *** Quick Text (y la integración de un portapapeles al estilo unclutter)
