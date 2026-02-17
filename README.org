@@ -1,79 +1,83 @@
 * Propuesta de proyecto
 ** Introducción
-Con el paso del tiempo y de las actualizaciones, varias de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, enfocando el desarrollo en GNOME 50 (actualmente disponible en fase beta), cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026.
+Con el paso del tiempo y tras sucesivas actualizaciones del entorno de escritorio GNOME, varias de mis extensiones favoritas han quedado obsoletas y sin mantenimiento activo. El objetivo de este proyecto es retomar el código fuente de susodichas extensiones y adaptarlo a las versiones más recientes del escritorio (con especial enfoque en GNOME 50, cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026 y que actualmente está disponible en fase beta).
 
-Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), ambas concentran en una única extensión múltiples funcionalidades, ajustes y widgets. 
+Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), que concentran múltiples funcionalidades en una única solución configurable.
 
-Una vez que las extensiones estén adaptadas a las versiones más recientes del escritorio y tras haber adquirido experiencia mediante el análisis y la modificación de su código, el siguiente paso será aportar un valor añadido mediante la incorporación de nuevas funcionalidades, opciones de configuración y optimización.
+Una vez restaurada la compatibilidad y tras haber comprendido el código y la arquitectura interna de las extensiones originales, el siguiente paso será aportar valor añadido mediante: 
+- Optimización de rendimiento.
+- Reorganización modular del código.
+- Incorporación de nuevas funcionalidades.
+- Reducción de conflictos entre extensiones.
+- Mejora en la experiencia de usuario.
 
-Como autocrítica, considero que el punto más débil del proyecto es su dispersión y amplitud de alcance. Las extensiones que lo conformarán son muy diferentes entre sí, lo que puede generar cierta confusión, siendo el objetivo final poco claro y ambicioso.
+Como autocrítica, considero que el punto más débil del proyecto es su amplitud y dispersión: las extensiones que lo conforman son heterogéneas en propósito y complejidad. Esto puede dificultar la definición de un objetivo claro y acotado. Por ello se tomará un enfoque modular y se establecerán prioridades en el desarrollo.
+
 ** Propuesta
-La extensión estaría conformada por: 
-*** Aylur's widgets 
+La nueva extensión unificada integraría, de forma modular y configurable, los siguientes componentes:
+*** Aylur's widgets (base conceptual)
 #+CAPTION: Screenshot que muestra el mensaje "DISCONTINUED" por parte del desarrollador.
 [[file:./img/aylurs.png]]
-Es la principal inspiración de este proyecto, compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más soporte. 
-La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de widgets: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
 
-[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podquicksettingstweaks-notify.svg
-Haré una revisión de la extensión, mencionando que partes considero no convenientes actualizar y por qué, además de qué otras extensiones podríamos estudiar para ayudarnos al desarrollo.
+[[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's Widgets]] fue compatible hasta GNOME 44 y actualmente está discontinuada. Su propuesta consistía en un conjunto amplio de widgets:
+- Barra de batería
+- Dashboard
+- Modificación del DateMenu
+- Reproductor multimedia
+- Menú de encendido
+- Indicador de espacios de trabajo
+- Indicador de notificaciones
+- Configuración de los Quick Settings
+- Relor en el escritorio
+La intención no es replicar todo sin criterio, sino: 
+- Evaluar qué componentes siguen siendo relevantes en GNOME 50.
+- Detectar cuáles han sido remplazados por mejoras nativas del sistema.
+Rediseñar los módulos con una arquitectura más eficiente y mantenible.
+
+[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí el código fuente de la extension]].
+
 #+CAPTION: Vista general de la configuración de la extensión
 [[file:./img/aylurs2.png]]
-**** Background Clock
+
+**** Módulos prioritarios
+***** Background Clock
 [[file:./img/aylurs-clock.svg]]
-Añade un widget de reloj al escritorio, al estilo de [[https://github.com/brndnmtthws/conky][conky]]. Permite personalizar:
-- Posición, mediante layouts (Middle Center, Bottom Left, etc), o mediante coordenadas (x,y).
-- Mostrar u ocultar la fecha y hora.
-- Reloj:
-	- Formato de hora
-	- Tamaño del reloj
-	- Fuente
-	- Color
-	- Sombras
-- Fecha con las mismas configuraciones que el reloj.
-- Estilo del widget:
-	- Color de background
-	- Padding
-	- Tamaño del borde
-	- Redondeado del borde
-	- Sombreado
 
-Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al ingresar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
-**** Battery Bar
+Widget de reloj sobre el escritorio, similar al comportamiento de [[https://github.com/brndnmtthws/conky][conky]]. 
+
+Permite: 
+- Posicionamiento por layouts o coordenadas. 
+- Personalización completa de tipografía, color, tamaño y sombras.
+- Configuración del contenedor (background, padding, bordes, redondeado).
+Problema detectado: degradación de rendimiento al entrar al overview.
+Objetivos:
+- Analizar conflictos con extensiones como [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]].
+- Optimizar el renderizado evitando bloqueos en animaciones (overview).
+
+***** Battery Bar
 [[file:./img/aylurs-battery.png]]
-
-Muestra una barra que indica el porcentaje de batería restante. Puede ser un reemplazo al ícono de batería. Tiene las siguientes opciones de configuración:
-- Posición en el Top Bar: izquierda, derecha o centrado.
-- Mostrar u ocultar el ícono de batería.
-- Mostrar porcentaje.
-- Configuraciones visuales:
-	- Altura de la barra.
-	- Ancho de la barra.
-	- Redondez de las esquinas de la barra.
-	- Padding izquierdo y derecho.
-- Colores de la barra:
-	- Color.
-	- Color cuando se está cargando la batería.
-	- Color con batería baja.
-	- Color de fondo.
-**** Dash Board
-[[file:./img/aylurs-dashboard.png]]
-Agrupa la mayoría de widgets en una "ventana de diálogo".  Podemos acceder a esta vista mediante un botón en el Top Bar o mediante un atajo de teclado. Puede parecer redundante, pero es útil si se desean desactivar todos los widgets para una experiencia de GNOME stock y solo acceder a los widgets mediante un atajo de teclado.
-
-**** Media Player
+Indicador alternativo de batería en el Top Bar.
+Configuraciones: 
+- Posición (izquieda, centrado, derecha).
+- Visibilidad del ícono y porcentaje. 
+- Dimensiones.
+- Colores dinámicos configurables (normal, cargando, batería baja).
+Tras revisar el código, considero que este módulo es de baja complejidad y alto impacto visual, ideal como uno de los primeros widgets a implementar.
+***** Media Player
 [[file:./img/aylurs-player.png]]
-Añade un reproductor multimedia (controles multimedia en el Top Bar). Permite modificar:
-- Track Button (información del contenido multimedia): 
-	- Activarlos o desactivarlos.
+
+Controles multimedia integrados en el Top Bar. Incluye:
+- Botón con información de pista.
+ 	- Activarlos o desactivarlos.
 	- Posición en el Top Bar (centrado, izquierda o derecha).
 	- Longitud máxima del texto.
 	- Mostrar u ocultar ícono del reproductor.
 	- Ícono simbólico o coloreado.
-	- Posición del ícono.
-- Controles
+	- Posición del ícono.     
+- Controles multimedia (anterior, pausa, siguiente).
 	- Activarlos o desactivarlos.
 	- Posición en el Top Bar (centrado, izquierda o derecha)
-- Player (el widget mostrado al dar clic en el Track Button).
+- Widget desplegable personalizable.
 	- Limpiar caché
 	- Reproductor preferido
 	- Estilo: Normal, horizontal, compacto, label in cover, label in cover + vertical control, full.
@@ -81,62 +85,116 @@ Añade un reproductor multimedia (controles multimedia en el Top Bar). Permite m
 	- Mostrar u ocultar título y modificar su alineación. 
 	- Mostrar u ocultar un slider de volumen y un botón de shuffle y loop.
 
-Hay varias extensiones parecidas a este widget, compatibles con versiones actuales de GNOME, que podríamos usar como referencia:
+Se estudarán como referencia:
 - [[https://extensions.gnome.org/extension/4470/media-controls][Media Controls]]
 - [[https://extensions.gnome.org/extension/9184/advanced-media-controller][Advanced Media Controller]]
-Y esta curiosidad:
+
+Estas extensiones agregan un widget simiar y son compatibles con versiones actuales de GNOME.
+También tenemos esta otra "curiosidad":
 - [[https://extensions.gnome.org/extension/9153/dock-media-player/][Dock Media Player]]
-**** Notification Indicator
+
+Objetivos:
+- Evitar duplicidad entre Top Bar, notificación y Quick Settings (esta última la veremos más adelante). Unificar la experiencia.
+- Diseñar un único backend MPRIS reutilizable.
+***** Workspace Indicator 
+[[file:./img/aylurs-workspace.svg]]
+
+Indicador de espacios de trabajo. Este widget tenía más sentido en versiones anteriores a GNOME 45, cuado solo estaba el botón de actividades, ahora se incluye una píldora indicadora. Aun así, se puede:
+- Ofrecer una alternativa más configurable, tomando como base [[https://extensions.gnome.org/extension/5090/space-bar/][Space Bar]], que ofrece un indicador de workspace similar al de waybar.
+- Añade atajos de teclado para navegar rápidamente entre los workspaces (al estilo de un Window Manager Tiling.
+- Añadir animaciones personalizadas.
+[[file:./img/spacebar.png]]
+
+***** Notification Indicator     
 [[file:./img/aylurs-notify.svg]]
 
-Añade un indicador de notificaciones con contador. Puede parecer innecesario en las últimas versiones de GNOME, pues ahora hay un círculo blanco aún lado del reloj que nos indica si hay notificaciones recientes, pero no hay un contador.
+Indicador de notificaciones con contador numérico. 
+Aunque GNOME ya incluye un indicador visual, no existe un contador de notificaciones. Este módulo aporta información cuantitativa adicional.
 Podemos configurar:
 - Posición en el Top Bar, izquierda, derecha, centrado.
 - Offset.
 - Estilo (íconos de apps o contador).
 - Máxima cantidad de íconos.
 - Ocultar/mostrar el contador.
-**** Power Menu
+
+***** Power Menu
 [[file:./img/aylurs-power.png]]
-Añade un botón al top bar, al dar clic en él, se muestra un cuadro de diálogo, un "power menu".
-Podemos configurar:
-- Posición en la Top Bar: centrado, izquierda o derecha.
+Botón personalizable con diálogo de apagado. Baja complejidad de implementación y buena aceptación estética. Permite:
+- Modificar la posición del ícono en la Top Bar: centrado, izquierda o derecha.
 - Layout, 2x2 o 1x4 (grid de los botones de power).
 - Redondez de los botones.
 - Tamaño de los botones. 
 - Padding de los íconos. 
 - Espaciado.
 - Dialog Background
-**** Workspace Indicator
-[[file:./img/aylurs-workspace.svg]]
-Añade un indicador de workspace, al estilo de waybar. Este widget tenía más sentido en versiones anteriores a GNOME 45, que no tenían la actual píldora indicadora de workspace y solo tenían el botón de actividades. Aun así, sería interesante adaptarlo a las versiones actuales de GNOME, pero, usando como base [[https://extensions.gnome.org/extension/5090/space-bar/][Space Bar]].
-Esta última es una muy buena extensión y está disponible para GNOME 49. Solo me gustaría añadirle una animación similar a la que tiene la pildora stock.
-[[file:./img/spacebar.png]]
-**** Quick Settings y DateMenu Mod
+
+**** Módulos secundarios o descartables
+***** Dashboard
+[[file:./img/aylurs-dashboard.png]]
+
+Agrupa la mayoría de widgets en una "ventana de diálogo", accesible mediante un botón en el Top Bar o con un atajo de teclado. Este módulo es redundante, aunque puede ser útil si se desea una experiencia stock y poder acceder a los widgets en un panel que los agrupe.
+
+***** QuickSettings y DateMenu Mod
 [[file:./img/aylurs-quick-notify.svg]]
-Estos dos añaden más opciones de configuración a los Quick Settings y al calendario/notificaciones. Es muy interesante; sin embargo, considero mejor no adaptar estos widgets/configuraciones, principalmente porque a continuación se mostrará una extensión que en mi opinión, lo hace mejor y que está adaptada hasta GNOME 48, por lo que debería ser más fácil de actualizar a GNOME 50.
 
-Aunque valdría la pena recuperar la opción de modificar el formato de hora/fecha (también podemos apoyarnos de [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]]) y, tal vez, el monitor de recursos en los quick settings.
+Permiten configurar los QuickSettings, el calendario y el panel de notificaciones. Estos dos componentes se descartan en su mayoría, más adelante se mostrará una extensión moderna que reemplazan estos módulos.
 
-*** Quick Text (y la integración de un portapapeles al estilo unclutter)
+Partes rescatables:
+- Monitor de recursos en los Quick Settings.
+- Modificación del formato de hor/fecha. Se estudará como referencia: [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]].
+
+*** Extensiones adicionales a integrar
+**** Quick Text.
 [[file:./img/quicktext.png]]
-Esta extensión es compatible hasta GNOME 47. Su desarrollador no ha hecho ninguna modificación en los últimos dos años. 
-Mediante un atajo de teclado (por defecto <Super> + <Ctrl> + i, aunque es totalmente personalizable) podemos acceder a un cuadro de texto, el contenido que introducimos se almacena en algún archivo de texto plano de nuestra preferencia.
-Con ella se puede capturar rápidamente fragmentos de texto e ideas, para luego convertirlos en tareas o eventos (un inbox en el método GTD).  Si usas vim, emacs, logseq u obsidian para la toma de notas, puede ser una extensión bastante útil.
-El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
 
-Para una "primera versión" es más que suficiente con revivir la extensión, pero más adelante me gustaría (con ayuda del código fuente de [[https://github.com/boerdereinar/copyous][Copyous]]) desarrollar algo similar a [[https://unclutterapp.com/][unclutter]] de MacOS.
+Extensión compatible hasta GNOME 47, no se le ha dado mantenimiento en los últimos dos años.
+Mediante un atajo de teclado (por defecto <Super> + <Ctrl> + i, aunque es totalmente personalizable) podemos acceder a un cuadro de texto, el contenido que escribimos se almacena en algún archivo de texto plano de nuestra preferencia. Es útil para capturar rápidamente notas, para luego convertirlos en tareas o eventos (un inbox en el método GTD).  Si usas vim, emacs, logseq u obsidian para la toma de notas, puede ser una extensión bastante útil. El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
+
+[[https://github.com/brainstormtrooper/quicktext][Aquí el código fuente]]
+
+El objetivo inicial es restaurar la compatibilidad: pero, como objetivo futuro:
+Inspirarse en herramientas como [[https://github.com/boerdereinar/copyous][Copyous]] y [[https://unclutterapp.com/][Unclutter]] para desarrollar:
+- Historial de portapapeles.
+- Vita desplegable estilo panel.
+
 [[file:./img/unclutter.gif]]
 
-*** Quick Settings Tweak
+**** Quick Settings Tweaks
 [[file:./img/quicksettingstweaks.png]]
-Esta extensión nos permite personalizar los Quick Settings y el calendario-notificaciones, como se mencionó anteriormente. Es compatible hasta GNOME 48 y tiene un desarrollo activo; sin embargo, no se adaptó correctamente para GNOME 49. Tiene una amplia cantidad de opciones, a continuación mostraré las generalidades de la extensión:
-**** Widgets
-***** Media widgets 
+
+Proyecto activo compatible hasta GNOME 48. Permite la configuración de los Quick Settings y del Date Menu.
+
+Repositorio: [[https://github.com/qwreey/quick-settings-tweaks][Quick Settings Tweaks]].
+
+Propuesta:
+- Integrar parcialmete su lógica.
+- Evitar solapamientos innecesarios.
+- Unficar backend de configuración.
+- Mantener modularidad interna.
+
+El objetivo es adaptar:
+***** Widgets: 
+****** Media widget
 [[file:./img/quicksettingstweaks-media.png]]
-Agrega un widget de control multimedia a los Quick Settings. Puede ser redundante, pues ya se tiene un widget similar en el top bar, así que podría ser conveniente tener una opción que nos permita seleccionar si se desea el widget en el top bar o en los Quick Settings. O se podría descartar este widget en particular.
-***** Notification Widgets
-Mueve las notificaciones debajo de los Quick Settings.
+
+Widget de control multimedia en los Quick Settings. Puede ser redundante, pues ya se tiene un widget similar en el top bar. Es conveniente agregar una opción de configuración que permita al usuario elegir entre el widget del top bar o de los Quick Settings.
+****** Notification Widget
 [[file:./img/quicksettingstweaks-notify.svg]]
 
-** Cómo implementar
+Mueve las notificaciones debajo de los Quick Settings.
+****** Weather Widget
+[[file:./img/quicksettingstweaks-weather.png]]
+
+Mueve el widget de tiempo debajo de los Quick Settings.
+
+***** Layouts y configuraciones
+- Cambiar el orden de los QuickSettings (ajustes rápidos).
+- Cambiar el orden de los indicadores del sistema (Iconos del top bar, Wi-Fi, Volumen, etcétera).
+- Cambiar el orden de Items del sistema (Botones arriba de los QuickSettings y de los slider.)
+- Date Menu
+  - Activar o desactivar el menú.
+  - Ocultar/mostar caja izquierda (notificaciones)
+  - Ocultar/mostrar caja derecha (calendario)
+- Overlay Mode: (cambia la animación al hacer clic en un toggle)
+
+* Roadmap
