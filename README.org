@@ -1,6 +1,6 @@
 * Propuesta de proyecto
 ** Introducción
-Con el paso del tiempo y de las actualizaciones, varias de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, incluida GNOME 50 (actualmente disponible en fase beta), cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026.
+Con el paso del tiempo y de las actualizaciones, varias de mis extensiones favoritas de GNOME quedaron obsoletas y sin mantenimiento. El objetivo de este proyecto es retomar su código fuente y adaptarlo para que sea compatible con las versiones más recientes del entorno de escritorio, enfocando el desarrollo en GNOME 50 (actualmente disponible en fase beta), cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026.
 
 Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), ambas concentran en una única extensión múltiples funcionalidades, ajustes y widgets. 
 
@@ -39,7 +39,7 @@ Añade un widget de reloj al escritorio, al estilo de [[https://github.com/brndn
 	- Redondeado del borde
 	- Sombreado
 
-Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al intesar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
+Una vez adaptado, considero fundamental optimizar este widget. Personalmente, siempre lo desactivaba porque mermaba la fluidez de la animación al ingresar al "overview". Sería bueno estudiar su comportamiento junto con otras extensiones para evitar conflictos, como con [[https://extensions.gnome.org/extension/5263/gtk4-desktop-icons-ng-ding/][DING (Desktop Icons NG)]] que muestra íconos en el escritorio.
 **** Battery Bar
 [[file:./img/aylurs-battery.png]]
 
@@ -59,7 +59,7 @@ Muestra una barra que indica el porcentaje de batería restante. Puede ser un re
 	- Color de fondo.
 **** Dash Board
 [[file:./img/aylurs-dashboard.png]]
-Agrupa todos los widgets en un "cuadro de diálogo". Podemos acceder a esta vista mediante un botón en el Top Bar o mediante un atajo de teclado. Aunque es bonito, considero que es redundante, así que no me parece interesante. Además, más adelante se mostrará otro cuadro de diálogo que puede ser un reemplazo a este DashBoard.
+Agrupa la mayoría de widgets en una "ventana de diálogo".  Podemos acceder a esta vista mediante un botón en el Top Bar o mediante un atajo de teclado. Puede parecer redundante, pero es útil si se desean desactivar todos los widgets para una experiencia de GNOME stock y solo acceder a los widgets mediante un atajo de teclado.
 
 **** Media Player
 [[file:./img/aylurs-player.png]]
@@ -115,13 +115,28 @@ Esta última es una muy buena extensión y está disponible para GNOME 49. Solo 
 [[file:./img/spacebar.png]]
 **** Quick Settings y DateMenu Mod
 [[file:./img/aylurs-quick-notify.svg]]
-Estos dos añaden más opciones de configuración a los Quick Settings y al calendario/notificaciones. Es muy interesante; sin embargo, considero mejor no adaptar estos widgets, principalmente porque a continuación se mostrará una extensión, que en mi opinión lo hace mejor y que está adaptada hasta GNOME 48, por lo que sería más fácil de actualizar.
-Lo que valdría la pena recuperar es la opción de modificar el formato del reloj (también podemos apoyarnos de [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]]) y, tal vez, el monitor de recursos en los quick settings.
+Estos dos añaden más opciones de configuración a los Quick Settings y al calendario/notificaciones. Es muy interesante; sin embargo, considero mejor no adaptar estos widgets/configuraciones, principalmente porque a continuación se mostrará una extensión que en mi opinión, lo hace mejor y que está adaptada hasta GNOME 48, por lo que debería ser más fácil de actualizar a GNOME 50.
+
+Aunque valdría la pena recuperar la opción de modificar el formato de hora/fecha (también podemos apoyarnos de [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]]) y, tal vez, el monitor de recursos en los quick settings.
 
 *** Quick Settings Tweak
+[[file:./img/quicksettingstweaks.png]]
+Esta extensión nos permite personar los Quick Settings y el calendario-notificaciones, como se mencionó anteriormente.  Es compatible hasta GNOME 48 y tiene un desarrollo activo; sin embargo, no se adaptó correctamente para GNOME 49. Tiene una amplia cantidad de opciones que mostraré a continuación. 
+**** Widgets
+***** Media widgets
+
+***** Notification Widgets
+
+***** Weather Widgets 
+
+***** Volume Mixer Widget
+
+**** Toggles
+**** Layout
+**** Menu
+[[file:./img/unclutter.gif]]
 
 *** Quick Text (y la integración de un portapapeles al estilo unclutter)
-
 
 
 Aquí dejamos de lado las Configuraciones visuales y pasamos a algo centrado en la productividad.
