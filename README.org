@@ -1,5 +1,31 @@
 #+TITLE: Diseño e implementación de una arquitectura modular para la modernización y unificación de extensiones en GNOME Shell 50
 #+DATE: 17-02-2026
+
+* Resumen de Componentes
+- Aylur's Widgets (base conceptual)
+  - Background Clock
+  - Battery Bar
+  - Media Player (Top Bar)
+    - Referencias: Media Controls, Advanced Media Controller, Dock Media Player
+  - Workspace Indicator
+    - Inspiración: Space Bar
+  - Notification Indicator
+  - Power Menu
+
+- Quick Text
+  - Restauración de compatibilidad con GNOME 50
+
+- Quick Settings Tweaks (integración parcial)
+  - Media Widget (alternativa al Top Bar)
+  - Notification Widget
+  - Weather Widget
+  - Reordenamiento de Quick Settings
+  - Configuración avanzada del Date Menu
+    - Referencia: Date Menu Formatter
+
+- Panel Corners
+  - Inspiración directa: Panel Corners (aunetx)
+
 * 1. Planteamiento del problema
 El presente proyecto aborda la modernización y unificación de múltiples extensiones legacy del entorno de escritorio GNOME mediante el diseño de una arquitectura modular compatible con GNOME Shell 50. 
 
@@ -145,7 +171,7 @@ Módulo de baja complejidad y buena aceptación estética.
 **** Dashboard
 [[file:./img/aylurs-dashboard.png]]
 
-Agrupa widgets en una ventana accesible desde el Top Bar o atajo.
+Agrupa widgets en una ventana accesible desde el Top Bar o con atajo de teclado.
 
 Evaluación: Potecialmentecialmente redundante. Se considera opcional o simplificado.
 
