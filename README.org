@@ -1,19 +1,26 @@
-* Propuesta de proyecto
-** Introducción
-Con el paso del tiempo y tras sucesivas actualizaciones del entorno de escritorio GNOME, varias de mis extensiones favoritas han quedado obsoletas y sin mantenimiento activo. El objetivo de este proyecto es retomar el código fuente de susodichas extensiones y adaptarlo a las versiones más recientes del escritorio (con especial enfoque en GNOME 50, cuyo lanzamiento oficial está previsto para el 18 de marzo de 2026 y que actualmente está disponible en fase beta).
+#+TITLE: Diseño e implementación de una arquitectura modular para la modernización y unificación de extensiones en GNOME Shell 50
+#+DATE: 17-02-2026
+* 1. Resumen técnico 
+El presente proyecto aborda la modernización y unificación de múltiples extensiones legacy del entorno de escritorio GNOME mediante el diseño de una arquitectura modular compatible con GNOME Shell 50. 
 
-Como se pretende dar mantenimiento a varias extensiones, la intención es unificarlas en una sola, siguiendo un enfoque similar al de [[https://extensions.gnome.org/extension/3843/just-perfection/][Just Perfection]] o al de [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][Aylur's  Widgets]] (principal inspiración de este proyecto), que concentran múltiples funcionalidades en una única solución configurable.
+El problema central radica en la fragilidad estructural del ecosistema de extensiones, el cual depende de APIs internas sujetas a cambios frecuentes, lo que genera obsolescencia. 
 
-Una vez restaurada la compatibilidad y tras haber comprendido el código y la arquitectura interna de las extensiones originales, el siguiente paso será aportar valor añadido mediante: 
-- Optimización de rendimiento.
-- Reorganización modular del código.
-- Incorporación de nuevas funcionalidades.
-- Reducción de conflictos entre extensiones.
-- Mejora en la experiencia de usuario.
+Se propone el desarrollo de una extensión unificada que sea: estrictamente modular, con bajo acoplamiento, que gestione de forma centralizada las señales, "lazy loading" y con control explícito del ciclo de vida de cada componente. 
 
-Como autocrítica, considero que el punto más débil del proyecto es su amplitud y dispersión: las extensiones que lo conforman son heterogéneas en propósito y complejidad. Esto puede dificultar la definición de un objetivo claro y acotado. Por ello se tomará un enfoque modular y se establecerán prioridades en el desarrollo.
+El resultado esperado es una arquitectura extensible, modular, mantenible y optimizada, validada mediante métricas objetivas de rendimiento y estabilidad. 
+* 2. Planteamiento técnico del problema
+* 3. Objetivos
+** Objetivos específicos
+- 1. Separar estrictamente lógica y frontend.
+- 2. Implementar gestión centralizada de señales.
+- 3. implementación de un Frmework modular.
+- 4. implementar lazy loading de módulos.
+- 5. Validar consumo de CPU y memoria.
+- 6. Documentar arquitectura interna.
 
-** Propuesta
+** Objetivo general
+Diseñar e implementar una arquitectura modular desacoplada que permita adaptar, integrar y optimizar extensiones legacy para garantizar su compatibilidad y estabilidad en GNOME 50, minimizando el impacto en el rendimiento y maximizando mantenibilidad.
+
 La nueva extensión unificada integraría, de forma modular y configurable, los siguientes componentes:
 *** Aylur's widgets (base conceptual)
 #+CAPTION: Screenshot que muestra el mensaje "DISCONTINUED" por parte del desarrollador.
@@ -56,6 +63,7 @@ Objetivos:
 
 ***** Battery Bar
 [[file:./img/aylurs-battery.png]]
+
 Indicador alternativo de batería en el Top Bar.
 Configuraciones: 
 - Posición (izquieda, centrado, derecha).
@@ -85,7 +93,7 @@ Controles multimedia integrados en el Top Bar. Incluye:
 	- Mostrar u ocultar título y modificar su alineación. 
 	- Mostrar u ocultar un slider de volumen y un botón de shuffle y loop.
 
-Se estudarán como referencia:
+Se estudiarán como referencia:
 - [[https://extensions.gnome.org/extension/4470/media-controls][Media Controls]]
 - [[https://extensions.gnome.org/extension/9184/advanced-media-controller][Advanced Media Controller]]
 
@@ -94,12 +102,12 @@ También tenemos esta otra "curiosidad":
 - [[https://extensions.gnome.org/extension/9153/dock-media-player/][Dock Media Player]]
 
 Objetivos:
-- Evitar duplicidad entre Top Bar, notificación y Quick Settings (esta última la veremos más adelante). Unificar la experiencia.
+- Evitar duplicidad entre Top Bar, notificación y Quick Settings (esta última la veremos más adelante). Unificando la experiencia.
 - Diseñar un único backend MPRIS reutilizable.
 ***** Workspace Indicator 
 [[file:./img/aylurs-workspace.svg]]
 
-Indicador de espacios de trabajo. Este widget tenía más sentido en versiones anteriores a GNOME 45, cuado solo estaba el botón de actividades, ahora se incluye una píldora indicadora. Aun así, se puede:
+Indicador de espacios de trabajo. Este widget tenía más sentido en versiones anteriores a GNOME 45, cuando solo estaba el botón de actividades, ahora se incluye una píldora indicadora. Aun así, se puede:
 - Ofrecer una alternativa más configurable, tomando como base [[https://extensions.gnome.org/extension/5090/space-bar/][Space Bar]], que ofrece un indicador de workspace similar al de waybar.
 - Añade atajos de teclado para navegar rápidamente entre los workspaces (al estilo de un Window Manager Tiling.
 - Añadir animaciones personalizadas.
@@ -141,19 +149,20 @@ Permiten configurar los QuickSettings, el calendario y el panel de notificacione
 
 Partes rescatables:
 - Monitor de recursos en los Quick Settings.
-- Modificación del formato de hor/fecha. Se estudará como referencia: [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]].
+- Modificación del formato de hora/fecha. Se estudará como referencia: [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]].
 
 *** Extensiones adicionales a integrar
 **** Quick Text.
 [[file:./img/quicktext.png]]
 
 Extensión compatible hasta GNOME 47, no se le ha dado mantenimiento en los últimos dos años.
-Mediante un atajo de teclado (por defecto <Super> + <Ctrl> + i, aunque es totalmente personalizable) podemos acceder a un cuadro de texto, el contenido que escribimos se almacena en algún archivo de texto plano de nuestra preferencia. Es útil para capturar rápidamente notas, para luego convertirlos en tareas o eventos (un inbox en el método GTD).  Si usas vim, emacs, logseq u obsidian para la toma de notas, puede ser una extensión bastante útil. El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
+Mediante un atajo de teclado (por defecto <Super> + <Ctrl> + i, aunque es totalmente personalizable) podemos acceder a un cuadro de texto, el contenido que escribimos se almacena en algún archivo de texto plano de nuestra preferencia. Es útil para tomar notas rápidas, para luego convertirlas en tareas o eventos (un inbox en el método GTD).  Si usas vim, emacs, logseq u obsidian para la toma de notas y la organización personal, puede ser una extensión bastante útil. El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
 
 [[https://github.com/brainstormtrooper/quicktext][Aquí el código fuente]]
 
-El objetivo inicial es restaurar la compatibilidad: pero, como objetivo futuro:
-Inspirarse en herramientas como [[https://github.com/boerdereinar/copyous][Copyous]] y [[https://unclutterapp.com/][Unclutter]] para desarrollar:
+El objetivo inicial es restaurar la compatibilidad.
+
+El objtivo futuro es inspirarse en herramientas como [[https://github.com/boerdereinar/copyous][Copyous]] y [[https://unclutterapp.com/][Unclutter]] para desarrollar:
 - Historial de portapapeles.
 - Vita desplegable estilo panel.
 
@@ -195,6 +204,232 @@ Mueve el widget de tiempo debajo de los Quick Settings.
   - Activar o desactivar el menú.
   - Ocultar/mostar caja izquierda (notificaciones)
   - Ocultar/mostrar caja derecha (calendario)
-- Overlay Mode: (cambia la animación al hacer clic en un toggle)
+  - Overlay Mode: (cambia la animación al hacer clic en un toggle)
+**** Panel Corners
+[[file:./img/panel-corners.png]]
 
-* Roadmap
+Proyecto comatible hasta GNOME 48. Se le ha dado mantenimiento hace un año. Añade al Top Bar esquinas redondeadas.      
+
+[[https://github.com/aunetx/panel-corners][Aquí el respositorio]]
+* 4. Arquitectura propuesta
+** 4.1 Principios de diseño
+- Separación de responsabilidades. 
+- Bajo acoplamiento
+- Alta cohesión
+- Gestión explícita del ciclo de vida.
+- Evitar dependencia directa de APIs internar con poca documentación.
+** 4.2 Estructura modular 
+#+BEGIN_SRC bash
+extension/
+  core/
+    moduleLoader.js
+    signalManager.js
+    settingsManager.js
+    logger.js
+  modules/
+    batteryBar/
+    powerMenu/
+    notificationIndicator/
+    panelCorners/
+    workspaceIndicator/
+    mediaPlayer/
+    dashboard/
+    backgroundClock/
+    quickText/
+  utils/
+    mprisService.js
+    layoutHelpers.js
+#+END_SRC
+** 4.3 Core Framework
+*** Module Loader
+- Carga y descarga dinámica de módulos.
+- Activación condicional según configuración.
+- Gestión de dependencias internas.
+
+*** Signal Manager
+- Registro centralizado.
+- Desconexión automática en disable().
+- Prevención de memory leaks.
+
+*** Settings Manager
+- Wrapper sobre GSettings.
+- Observadores desacoplados.
+- Actualización reactiva controlada.
+
+*** Logger
+- Sistema de depuración condicional.
+- Activación en modo desarrollo.
+* 5. Estrategia de optimización
+
+* 6. Métodología de validación
+Se utilizarán métricas como:
+
+- Consumo de CPU en estado idle.
+- Uso de memoria con múltiples módulos activos.
+- Fluidez de animación del Overview.
+- Ausencia de memory leaks tras ciclos enable/disable.
+
+Pruebas:
+
+1. Activación individual por módulo.
+2. Activación combinada.
+3. Prueba con extensiones externas activas.
+4. Stress test de señales repetitivas.
+
+* 7. Roadmap de implementación
+** Fase 0: Investigación (1 a 2 semanas)
+Objetivos técnicos:
+
+- Analizar cambios de API entre GNOME 44 → 50.
+- Identificar breaking changes en GJS y GNOME Shell.
+- Evaluar cambios en:
+  - imports ESModules
+  - señales y actores de Clutter
+  - Quick Settings
+  - Panel API
+- Estudiar nuevas prácticas recomendadas.
+- Mapear dependencias internas entre módulos.
+- Definir arquitectura modular base.
+- Definir contrato interno entre módulos (interfaces y responsabilidades).
+
+Actividades:
+
+- Auditoría de código actual.
+- Identificación de puntos de acoplamiento fuerte.
+- Diseño de:
+  - Core Manager
+  - Module Loader
+  - Event Bus interno (si aplica)
+- Definición de estrategia de lazy loading.
+
+Entregables:
+
+- Documento técnico de arquitectura.
+- Diagrama de componentes.
+- Lista priorizada de módulos.
+- Plan de migración incremental.
+** Fase 1: Núcleo mínimo viable (3 a 4 semanas)
+Objetivo: Extensión funcional y estable en GNOME 50 con núcleo modular.
+
+Implementar:
+- Sistema de configuración unificado (GSettings centralizado).
+- Loader modular (activación/desactivación dinámica).
+- Battery Bar.
+- Power Menu.
+- Notification Indicator.
+- Panel Corners.
+
+Criterios técnicos:
+- Compatibilidad total con GNOME 50 beta.
+- Ausencia de errores críticos en journalctl.
+- Sin bloqueos del Shell.
+- Sin listeners globales innecesarios.
+- Sin memory leaks detectables.
+
+Prioridades:
+- Estabilidad > nuevas funcionalidades.
+- No degradar rendimiento del panel.
+- Diseño desacoplado entre módulos.
+
+Resultado esperado:
+
+Extensión estable y modular en estado preliminar.
+** Fase 2: Módulos interactivos (4 - 6 semanas)
+Objetivo: Incorporar funcionalidades con mayor interacción y estado.
+
+Implementar:
+- Media Player (backend MPRIS unificado).
+- Workspace Indicator.
+- Dashboard simplificado.
+
+Enfoque de desarrollo:
+- Reutilización de código.
+- Minimización de listeners globales.
+- Gestión eficiente de señales.
+- Optimización de redraw.
+- Separación estricta entre lógica y UI.
+
+Requisitos técnicos:
+- Sin polling innecesario.
+- Uso controlado de señales MPRIS.
+- Desacoplamiento entre backend y frontend visual.
+- Pruebas con múltiples extensiones activas.
+
+Resultado esperado:
+Sistema interactivo robusto sin impacto perceptible en rendimiento.
+** Fase 3: Integración avanzada (4 semanas)
+Objetivo: Extender capacidades sin comprometer estabilidad.
+
+Implementar:
+- Adaptación parcial de Quick Settings Tweak.
+- Integración de Quick Text.
+- Diseño unificado de preferencias.
+- Refinamiento del Panel Corners (si requiere integración adicional).
+
+Actividades técnicas:
+- Refactor de preferencias para diseño consistente.
+- Consolidación de esquema GSettings.
+- Testing intensivo con:
+  - múltiples extensiones activas
+  - cambios dinámicos de configuración
+  - reinicios de Shell
+
+Criterios:
+- Sin regresiones funcionales.
+- Compatibilidad cruzada.
+- Bajo consumo de memoria.
+
+Resultado:
+Extensión madura, integrada y coherente en UX.
+
+** Fase 4: Optimización y refactor (2 semanas)
+Objetivo: Consolidar calidad técnica antes de publicación estable.
+
+Actividades:
+- Profiling de rendimiento.
+- Medición de consumo de memoria.
+- Eliminación de código redundante.
+- Reducción de acoplamientos innecesarios.
+- Mejora de documentación técnica.
+- Limpieza para publicación en extensions.gnome.org.
+
+Herramientas:
+- Looking Glass.
+- journalctl.
+- Instrumentación manual de tiempos críticos.
+
+Criterios:
+- Tiempo de carga optimizado.
+- Bajo impacto en el render del panel.
+- Código legible y mantenible.
+** Fase 5: Post lanzamiento
+Implementar progresivamente:
+- Historia de portapapeles estilo Unclutter
+- Mantener arquitectura modular
+- Mantenimiento y actualización
+* 8. Riesgos y desafios
+- Cambios futuros en GNOME 51 o posteriores.
+- Dependencia de APIs no documentadas.
+- Complejidad acumulativa por integración múltiple. 
+- Sobrecarga funcional si no se controla el alcance. Amplitud y dispersión: las extensiones que lo conforman son heterogéneas en propósito y complejidad. Esto puede dificultar la definición de un objetivo claro y acotado. Por ello, será fundamental adoptar un enfoque modular y establecer prioridades claras.
+
+Se mitigarán mediante:
+- Diseño modular estricto.
+- Pruebas iterativas.
+- Documentación constante.
+- Priorización clara de módulos.
+* 9. Resultados esperados
+- Arquitectónicamente modular.
+- Compatible con GNOME 50.
+- Escalable.
+- Mantenible.
+- Publicable.
+- Con base sólida para futuras versiones de GNOME.
+
+** Métricas de Calidad
+- Tiempo de activación < 200 ms.
+- Sin errores críticos en journalctl.
+- Sin bloqueos del Shell.
+- Sin degradación visible en FPS.
+- Código documentado y modular.
+
