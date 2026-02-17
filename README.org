@@ -15,8 +15,7 @@ La extensión estaría conformada por:
 Es la principal inspiración de este proyecto, compatible hasta GNOME 44. Su desarrollador ha mencionado explícitamente que el proyecto está discontinuado, no le dará más soporte. 
 La descripción de esta extensión en [[https://extensions.gnome.org/extension/5338/aylurs-widgets/][el sitio web de GNOME extension]] es: "Mi conjunto de widgets: Barra de batería, DashBoard, DateMenu Mod, Reproductor multimedia, Menú de encendido, Indicador de espacio de trabajo, Indicador de notificación, Configuración rápida modificada, Reloj de fondo." 
 
-[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podemos ver el código fuente]].
-
+[[https://github.com/Aylur/gnome-extensions/tree/legacy][Aquí podquicksettingstweaks-notify.svg
 Haré una revisión de la extensión, mencionando que partes considero no convenientes actualizar y por qué, además de qué otras extensiones podríamos estudiar para ayudarnos al desarrollo.
 #+CAPTION: Vista general de la configuración de la extensión
 [[file:./img/aylurs2.png]]
@@ -119,38 +118,25 @@ Estos dos añaden más opciones de configuración a los Quick Settings y al cale
 
 Aunque valdría la pena recuperar la opción de modificar el formato de hora/fecha (también podemos apoyarnos de [[https://extensions.gnome.org/extension/4655/date-menu-formatter/][date menu format]]) y, tal vez, el monitor de recursos en los quick settings.
 
-*** Quick Settings Tweak
-[[file:./img/quicksettingstweaks.png]]
-Esta extensión nos permite personar los Quick Settings y el calendario-notificaciones, como se mencionó anteriormente.  Es compatible hasta GNOME 48 y tiene un desarrollo activo; sin embargo, no se adaptó correctamente para GNOME 49. Tiene una amplia cantidad de opciones que mostraré a continuación. 
-**** Widgets
-***** Media widgets
-
-***** Notification Widgets
-
-***** Weather Widgets 
-
-***** Volume Mixer Widget
-
-**** Toggles
-**** Layout
-**** Menu
-[[file:./img/unclutter.gif]]
-
 *** Quick Text (y la integración de un portapapeles al estilo unclutter)
-
-
-Aquí dejamos de lado las Configuraciones visuales y pasamos a algo centrado en la productividad.
-Quick Text es compatible hasta GNOME 47
-
-Capture rápidamente fragmentos de texto e ideas, luego conviértalos en tareas o eventos
-
-Extensión Gnome-shell para insertar rápidamente notas en un archivo
-
-Diseñada para trabajar con casi cualquier aplicación de toma de notas basada en texto, esta extensión simplemente inserta fragmentos (con un prefijo opcional y sufijo) en un archivo de texto determinado.
-
-La combinación de teclas calientes (<ctrl> + <super> + i de forma predeterminada) se puede configurar así como el archivo de destino.
-
+[[file:./img/quicktext.png]]
+Esta extensión es compatible hasta GNOME 47. Su desarrollador no ha hecho ninguna modificación en los últimos dos años. 
+Mediante un atajo de teclado (por defecto <Super> + <Ctrl> + i, aunque es totalmente personalizable) podemos acceder a un cuadro de texto, el contenido que introducimos se almacena en algún archivo de texto plano de nuestra preferencia.
+Con ella se puede capturar rápidamente fragmentos de texto e ideas, para luego convertirlos en tareas o eventos (un inbox en el método GTD).  Si usas vim, emacs, logseq u obsidian para la toma de notas, puede ser una extensión bastante útil.
 El nombre y la ruta de acceso del archivo de destino deben establecerse antes de utilizar la extensión y el archivo debe existir.
 
-Consulte el wiki para ver las capturas de pantalla y las instrucciones.
+Para una "primera versión" es más que suficiente con revivir la extensión, pero más adelante me gustaría (con ayuda del código fuente de [[https://github.com/boerdereinar/copyous][Copyous]]) desarrollar algo similar a [[https://unclutterapp.com/][unclutter]] de MacOS.
+[[file:./img/unclutter.gif]]
+
+*** Quick Settings Tweak
+[[file:./img/quicksettingstweaks.png]]
+Esta extensión nos permite personalizar los Quick Settings y el calendario-notificaciones, como se mencionó anteriormente. Es compatible hasta GNOME 48 y tiene un desarrollo activo; sin embargo, no se adaptó correctamente para GNOME 49. Tiene una amplia cantidad de opciones, a continuación mostraré las generalidades de la extensión:
+**** Widgets
+***** Media widgets 
+[[file:./img/quicksettingstweaks-media.png]]
+Agrega un widget de control multimedia a los Quick Settings. Puede ser redundante, pues ya se tiene un widget similar en el top bar, así que podría ser conveniente tener una opción que nos permita seleccionar si se desea el widget en el top bar o en los Quick Settings. O se podría descartar este widget en particular.
+***** Notification Widgets
+Mueve las notificaciones debajo de los Quick Settings.
+[[file:./img/quicksettingstweaks-notify.svg]]
+
 ** Cómo implementar
