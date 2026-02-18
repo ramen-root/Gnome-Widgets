@@ -1,7 +1,7 @@
 #+TITLE: Diseño e implementación de una arquitectura modular para la modernización y unificación de extensiones en GNOME Shell 50
 #+DATE: 17-02-2026
 
-* Resumen de Componentes
+* 0. Resumen de Componentes
 - Aylur's Widgets (base conceptual)
   - Background Clock
   - Battery Bar
