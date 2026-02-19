@@ -69,7 +69,7 @@ Repositorio original:
 ** 2.3 componentes a reinterpretar y adaptar.
 *** 2.3.1 Módulos prioritarios
 **** Background Clock
-[[file:./img/aylurs-clock.svg]]
+[[file:./img/aylurs-clock.png]]
 
 Widget de reloj superpuesto en el escritorio, similar al comportamiento de
 [[https://github.com/brndnmtthws/conky][conky]].
@@ -125,7 +125,7 @@ Objetivos técnicos:
 - Separar estrictamente estado y representación visual.
 
 **** Workspace Indicator
-[[file:./img/aylurs-workspace.svg]]
+[[file:./img/aylurs-workspace.png]]
 
 Indicador configurable de espacios de trabajo.
 
@@ -140,7 +140,7 @@ Objetivos:
 
 [[file:./img/spacebar.png]]
 **** Notification Indicator
-[[file:./img/aylurs-notify.svg]]
+[[file:./img/aylurs-notify.png]]
 
 Indicador de notificaciones con contador numérico.
 
@@ -176,7 +176,7 @@ Agrupa widgets en una ventana accesible desde el Top Bar o con atajo de teclado.
 Evaluación: Potecialmentecialmente redundante. Se considera opcional o simplificado.
 
 **** QuickSettings y DateMenu Mod
-[[file:./img/aylurs-quick-notify.svg]]
+[[file:./img/aylurs-quick-notify.png]]
 
 Permiten modificar Quick Settings y Date Menu.
 
@@ -231,7 +231,7 @@ Componentes a evaluar:
 ***** Media Widget
 [[file:./img/quicksettingstweaks-media.png]]
 ***** Notification Widget
-[[file:./img/quicksettingstweaks-notify.svg]]
+[[file:./img/quicksettingstweaks.png]]
 ***** Weather Widget
 [[file:./img/quicksettingstweaks-weather.png]]
 ***** Layouts y configuraciones
