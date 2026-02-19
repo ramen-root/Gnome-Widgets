@@ -280,6 +280,63 @@ extension/
     mprisService.js
     layoutHelpers.js
 #+END_SRC
+Otra propuesta más completa para la empezar:
+#+BEGIN_SRC bash
+Gnome-Widgets/
+├── extension.js                 # Punto de entrada principal
+├── metadata.json                # Configuración GNOME 50
+├── prefs.js                     # Ventana de preferencias
+├── LICENSE                      # GPL-3.0
+├── README.md                    # Documentación
+├── .gitignore
+│
+├── extension/
+│   ├── core/
+│   │   ├── moduleLoader.js      # Sistema de carga dinámmica
+│   │   ├── signalManager.js     # Gestor central de signals (Gtk)
+│   │   ├── settingsManager.js   # Wrapper para dconf/gsettings
+│   │   └── logger.js            # Sistema de logging
+│   │
+│   ├── modules/
+│   │   ├── batteryBar/
+│   │   │   ├── module.js        # Interfaz estándar
+│   │   │   ├── batteryBar.js    # Lógica
+│   │   │   ├── batteryBar.css   # Estilos
+│   │   │   └── settings.json    # Config por defecto
+│   │   │
+│   │   ├── powerMenu/
+│   │   │   ├── module.js
+│   │   │   ├── powerMenu.js
+│   │   │   ├── powerMenu.css
+│   │   │   └── settings.json
+│   │   │
+│   │   ├── notificationIndicator/
+│   │   ├── panelCorners/
+│   │   ├── workspaceIndicator/
+│   │   ├── mediaPlayer/
+│   │   ├── dashboard/
+│   │   ├── backgroundClock/
+│   │   ├── quickText/
+│   │   └── _template/           # Template para nuevos módulos
+│   │
+│   └── utils/
+│       ├── mprisService.js      # Interfaz MPRIS D-Bus
+│       ├── layoutHelpers.js     # Helpers para UI
+│       ├── gsettingsHelper.js   # Wrapper más avanzado
+│       └── dBusHelper.js        # Utilidades D-Bus
+│
+├── schemas/
+│   └── org.gnome.shell.extensions.gnome-widgets.gschema.xml
+│
+├── docs/
+│   ├── DEVELOPMENT.md           # Guía de desarrollo
+│   ├── MODULE_API.md            # API estándar de módulos
+│   └── GNOME50_MIGRATION.md     # Notas para GNOME 50
+│
+└── tests/
+    ├── core/
+    └── modules/
+#+END_SRC
 ** 3.3 Core Framework
 *** Module Loader
 - Carga y descarga dinámica de módulos.
